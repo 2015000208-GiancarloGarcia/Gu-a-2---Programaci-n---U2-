@@ -1,0 +1,19 @@
+private void btnVerificar_Click(object sender, EventArgs e)
+{
+    if (string.IsNullOrEmpty(txtCaracter.Text)) return;
+
+    char c = txtCaracter.Text.ToLower()[0];
+
+    if ("aeiou".Contains(c))
+    {
+        lblResultado.Text = "Es una vocal";
+    }
+    else if (char.IsDigit(c))
+    {
+        lblResultado.Text = "Es un dígito";
+    }
+    else
+{
+        lblResultado.Text = "Es otro tipo de carácter";
+    }
+}
