@@ -1,0 +1,32 @@
+private void btnConvertir_Click(object sender, EventArgs e)
+{
+    try
+    {
+        double valorEntrada = double.Parse(txtCantidad.Text);
+        string origen = cmbOrigen.SelectedItem.ToString();
+        string destino = cmbDestino.SelectedItem.ToString();
+        
+        double metros = 0;
+        switch (origen)
+        {
+            case "Metros":      metros = valorEntrada; break;
+            case "Pies":        metros = valorEntrada * 0.3048; break;
+            case "Centímetros": metros = valorEntrada / 100; break;
+            case "Pulgadas":    metros = valorEntrada * 0.0254; break;
+        }
+        double resultado = 0;
+        switch (destino)
+        {
+            case "Metros":      resultado = metros; break;
+            case "Pies":        resultado = metros / 0.3048; break;
+            case "Centímetros": resultado = metros * 100; break;
+            case "Pulgadas":    resultado = metros / 0.0254; break;
+        }
+
+        lblResultado.Text = $"{valorEntrada} {origen} equivalen a {Math.Round(resultado, 4)} {destino}";
+    }
+    catch 
+    {
+        MessageBox.Show("Asegúrate de ingresar un número y seleccionar ambas unidades.");
+    }
+}
