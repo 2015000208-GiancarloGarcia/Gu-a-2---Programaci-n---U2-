@@ -1,0 +1,36 @@
+private void btnGenerar_Click(object sender, EventArgs e)
+{
+    if (cmbPago.SelectedItem == null)
+    {
+        MessageBox.Show("Seleccione una forma de pago.");
+        return;
+    }
+
+    const double PRECIO_SIN_IVA = 650.00;
+    const double IVA = 0.12;
+    int cantidad = (int)numCantidad.Value;
+    string formaPago = cmbPago.SelectedItem.ToString();
+
+    double precioConIva = PRECIO_SIN_IVA * (1 + IVA);
+    double totalSinDescuento = precioConIva * cantidad;
+    
+    double porcentajeDescuento = 0;
+    switch (formaPago)
+    {
+        case "Efectivo":           porcentajeDescuento = 0.10; break;
+        case "Tarjeta de crédito": porcentajeDescuento = 0.05; break;
+        case "Vale de regalo":     porcentajeDescuento = 0.15; break;
+    }
+
+    double descuentoRealizado = totalSinDescuento * porcentajeDescuento;
+    double totalAPagar = totalSinDescuento - descuentoRealizado;
+
+    lblDetalle.Text = "DETALLE DE PAGO:\n" +
+        $"• Cantidad de impresoras: {cantidad}\n" +
+        $"• Precio Unitario (c/IVA): Q{precioConIva:N2}\n" +
+        $"• Total sin descuento: Q{totalSinDescuento:N2}\n" +
+        $"• Forma de pago: {formaPago}\n" +
+        $"• Descuento realizado: Q{descuentoRealizado:N2}\n" +
+        "------------------------------\n" +
+        $"• TOTAL A PAGAR: Q{totalAPagar:N2}";
+}
