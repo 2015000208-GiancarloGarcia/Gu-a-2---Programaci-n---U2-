@@ -1,0 +1,35 @@
+private void btnCalcular_Click(object sender, EventArgs e)
+{
+    try
+    {
+        double grados = double.Parse(txtAngulo.Text);
+        
+        double radianes = grados * (Math.PI / 180.0);
+        double resultado = 0;
+
+        string seleccion = cmbFuncion.SelectedItem.ToString();
+
+        switch (seleccion)
+         {
+            case "Seno":
+                resultado = Math.Sin(radianes);
+                break;
+            case "Coseno":
+                resultado = Math.Cos(radianes);
+                break;
+            case "Tangente":
+                // Evitar error en 90, 270... donde la tangente es infinita
+                if (grados % 180 == 90 || grados % 180 == -90) {
+                    lblResultado.Text = "Resultado: Indefinido";
+                    return;
+                }
+                resultado = Math.Tan(radianes);
+                break;
+        }
+        lblResultado.Text = $"Resultado {seleccion}: {Math.Round(resultado, 4)}";
+    }
+    catch (Exception)
+    {
+    MessageBox.Show("Por favor, ingresa un número válido y selecciona una función.");
+     }
+}
