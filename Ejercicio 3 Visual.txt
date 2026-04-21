@@ -1,0 +1,32 @@
+private void btnCalcular_Click(object sender, EventArgs e)
+{
+    if (cmbSector.SelectedItem == null)
+    {
+        MessageBox.Show("Por favor, selecciona un sector del estadio.");
+        return;
+    }
+
+    double precio = 0;
+    string sector = cmbSector.SelectedItem.ToString();
+    int cantidad = (int)numCantidad.Value;
+
+    switch (sector)
+    {
+        case "Palco":
+                precio = 300.00;
+            break;
+        case "Tribuna":
+            precio = 100.00; 
+            break;
+        case "Preferencia":
+            precio = 50.00; 
+            break;
+        case "Generales":
+            precio = 30.00; 
+            break;
+    }
+
+    double total = precio * cantidad;
+
+    lblTotal.Text = $"Total a pagar: Q{total:N2}";
+}
